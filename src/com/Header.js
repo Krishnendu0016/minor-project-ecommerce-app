@@ -56,7 +56,7 @@ const Header = () => {
                   <Link>
                     <img src='images/cart.svg' alt='Cart'></img>
                     <div className='d-flex flex-column'>
-                     <span className='badge bg-white text-dark'> 0</span>
+                     <span className='badge text-white'> 0</span> 
                     </div>
                   </Link>  
                 </div>

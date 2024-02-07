@@ -4,7 +4,7 @@ import { BsSearch } from 'react-icons/bs';
 const Header = () => {
   return (
     <>
-      <header className='header-top-strip py-3'>
+      <header className='header-top-strip py-1'>
         <div className='container-xxl' >
           <div className='row'>
             {/* <div className='col-6'></div>
@@ -34,7 +34,7 @@ const Header = () => {
                 <div>
                   <Link className="d-flex align-items-center gap-10 text white">
                     <img src='images/compare.svg' alt='compare'></img>
-                    <p className='mb-0'>
+                    <p className='mb-0 text-white'>
                       Compare<br />Products
                     </p>
                   </Link>
@@ -42,14 +42,14 @@ const Header = () => {
                 <div>
                   <Link className="d-flex align-items-center gap-10 text white">
                     <img src='images/wishlist.svg' alt='wishlist'></img>
-                    <p className='mb-0'>Favourite<br />Wishlist
+                    <p className='mb-0 text-white'>Favourite<br />Wishlist
                     </p>
                   </Link>
                 </div>
                 <div>
                   <Link className="d-flex align-items-center gap-10 text white">
                     <img src='images/user.svg' alt='login'></img>
-                    <p className='mb-0'>Log in<br />
+                    <p className='mb-0 text-white'>Log in<br />
                     </p>
                   </Link>
                 </div>

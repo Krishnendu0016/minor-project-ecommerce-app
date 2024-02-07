@@ -89,6 +89,10 @@ a {
 background-color: transparent;
 color: var(--color-febd69)!important;
 }
+.main-banner-content {
+  top: 15%;
+  left: 5%;
+}
 
 /* Footer Part starts here */
 

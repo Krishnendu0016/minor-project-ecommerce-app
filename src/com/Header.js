@@ -18,7 +18,7 @@ const Header = () => {
           <div className='row alert-items-center '>
             <div className='col-2'>
               <h2>
-                <Link className='text-white'>Amazon</Link>
+                <Link className='text-white'>Shoppers</Link>
               </h2>
             </div>
             <div className='col-5'>
@@ -32,38 +32,70 @@ const Header = () => {
             <div className='col-5'>
               <div className='header-upper-links d-flex align-items-center justify-content-between'>
                 <div>
-                  <Link>
+                  <Link className="d-flex align-items-center gap-10 text white">
                     <img src='images/compare.svg' alt='compare'></img>
-                    <p>Compare<br />Products
+                    <p className='mb-0'>
+                      Compare<br />Products
                     </p>
                   </Link>
                 </div>
                 <div>
-                  <Link>
+                  <Link className="d-flex align-items-center gap-10 text white">
                     <img src='images/wishlist.svg' alt='wishlist'></img>
-                    <p>Fevourite<br />Wishlist
+                    <p className='mb-0'>Favourite<br />Wishlist
                     </p>
                   </Link>
                 </div>
                 <div>
-                  <Link>
+                  <Link className="d-flex align-items-center gap-10 text white">
                     <img src='images/user.svg' alt='login'></img>
-                    <p>Log in<br />
+                    <p className='mb-0'>Log in<br />
                     </p>
                   </Link>
                 </div>
                 <div>
-                  <Link>
+                  <Link className="  gap-10 text white">
                     <img src='images/cart.svg' alt='Cart'></img>
-                    <div className='d-flex flex-column'>
-                     <span className='badge text-white'> 0</span> 
+                    <div className='d-flex flex-column gap-10'>
+                      <span className='badge text-white'> 0</span>
                     </div>
-                  </Link>  
+                  </Link>
                 </div>
 
               </div>
             </div>
           </div>
+        </div>
+      </header>
+      <header className='header-bottom py-3'>
+        <div className='container-xxl'>
+          <div className='row'>
+            <div className='col-12'>
+              <div className="menu-bottom d-flex lalign-items-center gap-30">
+                <div>
+                  <div className="dropdown">
+                    <button className="btn btn-secondary dropdown-toggle bg-transparent border-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                      
+                      <img src="images/menus.svg" alt="" /><span>Shop Categories</span>
+                    </button>
+                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div className='menu-links'>
+                  <div className="d-flex align-items-center gap-15">
+                    <NavLink to="/">Home</NavLink>
+                    <NavLink to="/">Our Store</NavLink>
+                    <NavLink to="/contact">Contact </NavLink>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </header>
     </>

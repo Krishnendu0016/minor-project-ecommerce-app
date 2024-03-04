@@ -11,6 +11,7 @@
   --color-febd69: #febd69;
   --color-232f3e: #8cb2e1;
   --color-bf4800: #bf4800;
+  --color-f5f5f7: #f5f5f7;
 }
 
 body {
@@ -171,6 +172,15 @@ a {
 .small-banner {
   width: 49%;
 }
+/* home wrapper 2 */
+.home-wrapper-2{
+  background-color: var(--color-f5f5f7);
+  
+}
+
+/* home wrapper 2 ends*/
+
+
 
 /* Footer Part starts here */
 

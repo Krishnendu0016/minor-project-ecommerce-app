@@ -188,17 +188,44 @@ const Home = () => {
                 </div>
             </section>
             {/* starting from here */}
-            <section classname="special-wrapper py-5 home-wrapper-2">
-                <div classname="container-xxl">
-                    <div classname="row">
-                        <div classname="col-12">
-                            <h3 classname="section-heading">Special Products</h3>
+            <section className="famous-wrapper py-5 home-wrapper-2">
+                <div className="container-xxl">
+                    <div className="row">
+                        <div className="col-3">
+                            <div className="famous-card bg-dark">
+                                <h5>Big Screen</h5>
+                                <h6>Smart Watch Series 7</h6>
+                            </div>
                         </div>
                     </div>
-                    <div classname="row">
+                </div>
+            </section>
+            <section className="special-wrapper py-5 home-wrapper-2">
+                <div className="container-xxl">
+                    <div className="row">
+                        <div className="col-12">
+                            <h3 className="section-heading">Special Products</h3>
+                        </div>
+                    </div>
+                    <div className="row">
                         <SpecialProduct />
                         <SpecialProduct />
                         <SpecialProduct />
+                    </div>
+                </div>
+            </section>
+            <section className="popular-wrapper py-5 home-wapper-2">
+                <div className="container-xxl">
+                    <div className="row">
+                        <div className="col-12">
+                            <h3 className="section-heading">Our Popular Collection</h3>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <ProductCard />
+                        <ProductCard />
+                        <ProductCard />
+                        <ProductCard />
                     </div>
                 </div>
             </section>

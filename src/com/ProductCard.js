@@ -17,7 +17,7 @@ const ProductCard = () => {
           <h5 className="product-title">
             Kids Headphones Bulk 10 Pack Multi Colored For Students
           </h5>
-          <ReactStars count={5} size={24} value="3" edit={false} activeColor="#ffd700"
+          <ReactStars count={5} size={24} value={4} edit={false} activeColor="#ffd700"
           />
           <p className="price">₹1500</p>
         </div>

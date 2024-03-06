@@ -260,19 +260,26 @@ footer .input-group-text {
   position: relative;
 }
 
+.product-card .product-image {
+   height: 270px;
+}
+.product-card .product-image img{
+  object-fit: contain; 
+}
 .product-card .product-image > img:nth-child(2) {
   display: none;
+
 }
 
 .product-card:hover .product-image > img:nth-child(1) {
   display: none;
+  transition: 0.3s;
 }
 
 .product-card:hover .product-image > img:nth-child(2) {
   display: block;
+  transition: 0.3s; 
 }
-
-
 
 .product-card:hover .action-bar {
   right: 15px;

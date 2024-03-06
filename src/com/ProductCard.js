@@ -10,6 +10,7 @@ const ProductCard = () => {
         </div>
         <div className="product-image">
           <img src="images/watch.jpg" alt="product img" />
+          <img src="images/watch-1.avif" alt="product img" />
           <div className="product-details">
             <h6 className='brand'>Havels</h6>
             <h5 className="product-title">

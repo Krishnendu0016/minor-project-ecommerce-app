@@ -236,3 +236,18 @@ footer .input-group-text {
   color: white;
   padding: 8px 17px;
 }
+.section-heading{
+  font-size: 26px;
+  line-height: 32px;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+/* Product Card  */
+.product-card{
+  padding: 15px;
+  background-color: white;
+  border-radius: 10px;
+   
+}
+
+/* Product Card  Ends */

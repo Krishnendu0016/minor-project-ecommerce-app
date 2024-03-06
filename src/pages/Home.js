@@ -212,16 +212,17 @@ const Home = () => {
                     <div className="row">
                         <div className="col-12">
                             <h3 className="section-heading">Featured Collection</h3>
-                            <div>
-                                <ProductCard/>
-                                <ProductCard/>
-                                <ProductCard/>
-                                <ProductCard/>
+                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                <ProductCard />
+                                <ProductCard />
+                                <ProductCard />
+                                <ProductCard />
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+
         </>
     )
 }

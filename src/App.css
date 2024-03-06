@@ -13,12 +13,16 @@
   --color-bf4800: #bf4800;
   --color-f5f5f7: #f5f5f7;
   --color-ededed: #ededed;
+  --color-1c1c1b: #1c1c1b;
+  ;
 }
-.card-wrapper{
+
+.card-wrapper {
   background-color: white;
   box-shadow: 0 0 10px #0000001a;
   padding: 15px;
 }
+
 body {
   font-family: 'Rubik', sans-serif;
 }
@@ -197,25 +201,28 @@ a {
   width: 25%;
   padding: 10px 10px 10px 20px;
 }
+
 .categories>div>div {
   width: 60%;
 }
 
-.categories>div:nth-child(1), 
-.categories>div:nth-child(2), 
-.categories>div:nth-child(3), 
-.categories>div:nth-child(4){ 
-   border-bottom: 1px solid var(--color-ededed);
+.categories>div:nth-child(1),
+.categories>div:nth-child(2),
+.categories>div:nth-child(3),
+.categories>div:nth-child(4) {
+  border-bottom: 1px solid var(--color-ededed);
 }
-.categories>div:nth-child(1), 
-.categories>div:nth-child(2), 
-.categories>div:nth-child(3){ 
-   border-bottom: 1px solid var(--color-ededed);
+
+.categories>div:nth-child(1),
+.categories>div:nth-child(2),
+.categories>div:nth-child(3) {
+  border-bottom: 1px solid var(--color-ededed);
 }
-.categories>div:nth-child(5), 
-.categories>div:nth-child(6), 
-.categories>div:nth-child(7){ 
-   border-bottom: 1px solid var(--color-ededed);
+
+.categories>div:nth-child(5),
+.categories>div:nth-child(6),
+.categories>div:nth-child(7) {
+  border-bottom: 1px solid var(--color-ededed);
 }
 
 
@@ -236,18 +243,59 @@ footer .input-group-text {
   color: white;
   padding: 8px 17px;
 }
-.section-heading{
+
+.section-heading {
   font-size: 26px;
   line-height: 32px;
   font-weight: 500;
   margin-bottom: 30px;
 }
+
 /* Product Card  */
-.product-card{
+.product-card {
   padding: 15px;
   background-color: white;
   border-radius: 10px;
-   
+  overflow: hidden;
+  position: relative; 
+}
+.product-card:hover .action-bar {
+  right: 15px;
 }
 
+.action-bar {
+  position: absolute; /* Position absolutely inside .product-card */
+  top: 0;
+  right: -100%; /* Initially hide the action bar */
+  transition: right 0.3s ease; /* Add transition for smooth animation */
+}
+
+/* Other styles for .action-bar */
+
+.product-card .product-details h6 {
+  color: var(--color-bf4800);
+  font-size: 13px;
+}
+
+.product-card .product-details h5 {
+  font-size: 15px;
+  color: var(--color-1c1c1b);
+
+}
+
+.product-card .product-details p.price {
+  font-size: 16px;
+  color: var(--color-1c1c1b);
+
+}
+
+.action-bar {
+  top: 20%;
+  right: -20px;
+  transition: 0.3s;
+}
+.wishlist-icon{
+  top: 13%;
+  right: 19px;
+}
 /* Product Card  Ends */

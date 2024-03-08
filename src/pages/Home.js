@@ -180,8 +180,8 @@ const Home = () => {
                             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                                 <ProductCard />
                                 <ProductCard />
-                                <ProductCard />
-                                <ProductCard />
+                                {/* <ProductCard />
+                                <ProductCard /> */}
                             </div>
                         </div>
                     </div>

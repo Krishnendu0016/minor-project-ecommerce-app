@@ -538,3 +538,17 @@ footer .input-group-text {
   color: var(--color-777777);
 }
 /* Contact Page ends */
+ /* compare product starts */
+.compare-product-card {
+  padding: 20px 15px ;
+  background-color:white ;
+  border-radius: 10px;
+}
+.compare-product-cross .cross{
+  top:15px;
+  right:15px;
+  width:15;
+  padding:3px;
+  cursor: pointer;
+}
+/* compare product ends here */

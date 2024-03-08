@@ -313,11 +313,13 @@ footer .input-group-text {
   color: var(--color-1c1c1b);
 
 }
+
 .product-card p.description {
   font-size: 13px;
   color: var(--color-777777);
   margin-right: 20px;
 }
+
 .action-bar {
   top: 20%;
   right: -20px;
@@ -514,41 +516,51 @@ footer .input-group-text {
   background-color: white;
   gap: 15px;
 }
-.contact-inner-wrapper > div {
+
+.contact-inner-wrapper>div {
   width: 48%;
 }
+
 .contact-title {
   font-size: 26px;
   font-weight: 500;
   line-height: 35px;
   text-align: left;
 }
+
 .contact-inner-wrapper form .form-control {
   background-color: var(--color-f5f5f7);
   border-radius: 10px;
   border-color: transparent;
   padding: 10px;
 }
+
 .contact-inner-wrapper ul {
   list-style: none;
 }
+
 .contact-inner-wrapper address,
 .contact-inner-wrapper a,
 .contact-inner-wrapper p {
   color: var(--color-777777);
 }
+
 /* Contact Page ends */
- /* compare product starts */
+/* compare product starts */
+
 .compare-product-card {
-  padding: 20px 15px ;
-  background-color:white ;
+  padding: 20px 15px;
+  background-color: white;
   border-radius: 10px;
 }
-.compare-product-cross .cross{
-  top:15px;
-  right:15px;
-  width:15;
-  padding:3px;
+
+.compare-product-card .cross,
+.wishlist-card .cross {
+  top: 15px;
+  right: 15px;
+  width: 25px;
+  padding: 3px;
   cursor: pointer;
 }
+
 /* compare product ends here */

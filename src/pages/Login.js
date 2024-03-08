@@ -10,7 +10,8 @@ const Login = () => {
         <BreadCrumb title="Login"/>
 
         <div className="login-wrapper py-5 home-wapper-2">
-          <div className="row">
+         <div className="container-xxl">
+         <div className="row">
             <div className="col-12">
               <div className="auth-card">
               <h3 className="text-center mb-3">Login</h3>
@@ -42,6 +43,7 @@ const Login = () => {
             </div>
           </div>
           </div>
+         </div>
         </div>
         
     </>

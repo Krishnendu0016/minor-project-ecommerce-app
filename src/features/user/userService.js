@@ -8,6 +8,15 @@ const register = async (userData) => {
     }
 }
 
+const login = async (userData) => {
+    console.log(userData)
+    const response = await axios.post(`${base_url}user/login`, userData);
+    if (response.data) {
+        return response.data;
+    }
+}
+
 export const authService = {
-    register
+    register,
+    login,
 }

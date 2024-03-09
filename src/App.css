@@ -163,6 +163,10 @@ a {
   letter-spacing: 0.3px;
   text-transform: uppercase;
 }
+.error {
+  color: red;
+  font-size: 12px;
+}
 
 .small-banner-content h5 {
   font-size: 22px;

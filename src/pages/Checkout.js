@@ -98,28 +98,28 @@ const Checkout = () => {
                                      <img src={watch} className="img-fluid"  alt="product" />
                                 </div>
                                 <div>
-                                    <h5 className="title">wirwojf</h5>
-                                    <p>ewofjoefk</p>
+                                    <h5 className="total-price">Watch</h5>
+                                    <p className='total-price'>ewef9869k</p>
                                 </div>
                             </div>
                             <div className="flex-grow-1">
-                                <h5>$100</h5>
+                                <h5 className='total'>$100</h5>
                             </div>
                         </div>
                         </div>
                         <div className-="border-bottom py-4">
                         <div className="d-flex justify-content-between align-items-center">
-                            <p>Subtotal</p>
-                            <p>$10000</p>
+                            <p className='total'>Subtotal</p>
+                            <p className='total-price'>$10000</p>
                         </div>
                         <div className="d-flex justify-content-between align-items-center">
-                            <p>Shipping</p>
-                            <p>$10000</p>
+                            <p className='mb-0 total'>Shipping</p>
+                            <p className='mb-0 total-price'>$10000</p>
                         </div>
                         </div>
                         <div className="d-flex justify-content-between align-items-center border-bottom py-4">
-                            <h4>Total</h4>
-                            <h5>$10000</h5>
+                            <h4 className='total'>Total</h4>
+                            <h5 className='total-price'>$10000</h5>
                         </div>
                     </div>
                 </div>

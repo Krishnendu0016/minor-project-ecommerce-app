@@ -68,7 +68,7 @@ export const authSlice = createSlice({
             state.isSuccess = false;
             state.message = action.error;
             if(state.isError===true){
-                toast.info("User Logged In unsuccessfully")
+                toast.info(action.error)
             }
         })
     }

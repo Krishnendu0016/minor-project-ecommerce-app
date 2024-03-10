@@ -1,12 +1,12 @@
 import React from 'react'
 import Meta from '../com/Meta'
 import BreadCrumb from '../com/BreadCrumb'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 import Container from '../com/Container'
 import CustomInput from '../com/CustomInput'
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { registerUser } from '../features/user/userSlice'
 
 const signUpSchema = yup.object({
@@ -18,6 +18,8 @@ const signUpSchema = yup.object({
 });
 
 const Signup = () => {
+  const authState=useSelector(state=>state.auth)
+  const navigate=useNavigate()
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -30,6 +32,7 @@ const Signup = () => {
     validationSchema: signUpSchema,
     onSubmit: values => {
       dispatch(registerUser(values));
+      navigate('/login')
     },
   });
 
@@ -102,6 +105,7 @@ const Signup = () => {
                   <div className=" mt-3 d-flex justify-content-center gap-15 align-items-center">
                     <button className="button border-0">SignUp</button>
                   </div>
+
                 </div>
               </form>
             </div>

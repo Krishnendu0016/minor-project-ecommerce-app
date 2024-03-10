@@ -6,7 +6,9 @@ import wishlist from "../images/wishlist.svg";
 import user from "../images/user.svg";
 import cart from "../images/cart.svg";
 import menu from "../images/menu.svg";
+import { useDispatch, useSelector } from 'react-redux'
 const Header = () => {
+  const authState=useSelector(state=>state.auth)
   return (
     <>
       <header className='header-top-strip py-1'>
@@ -54,11 +56,14 @@ const Header = () => {
                   </Link>
                 </div>
                 <div>
-                  <Link to="/login"
+                  <Link to={ authState?.user==="" ? "/login":""}
                     className="d-flex align-items-center gap-10 text white">
                     <img src={user} alt="user" />
-                    <p className='mb-0 text-white'>Log in<br />
+                    {
+                      authState?.user==="" ?<p className='mb-0 text-white'> Log in<br />
+                      </p> :<p className='mb-0 text-white'> {authState?.user?.firstname}
                     </p>
+                    }
                   </Link>
                 </div>
                 <div>

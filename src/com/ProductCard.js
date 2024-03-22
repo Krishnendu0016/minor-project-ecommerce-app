@@ -30,8 +30,11 @@ const ProductCard = (props) => {
             <button className='border-0 bg-transparent'> <img src={wish} alt="wishlist" /></button>
           </div>
           <div className="product-image">
-            <img src={watch} className="img-fluid" alt="product image" />
-            <img src={watch2} className="img-fluid" alt="product image" />
+            <img src={item?.images?.[0]?.url} className="img-fluid  mx-auto" alt="product image" width={160} />
+            {/* <img src={watch} className="img-fluid " alt="product image" /> */}
+           
+            <img src={watch2} className="img-fluid d-block mx-auto" alt="product image" width={160} />
+            {/* <img src={watch2} className="img-fluid" alt="product image" /> */}
           </div>
           <div className="product-details">
             <h6 className='brand'>{

@@ -4,6 +4,7 @@ import BreadCrumb from '../com/BreadCrumb'
 import Container from '../com/Container';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserProductWishlist } from '../features/user/userSlice';
+import { addToWishlist } from "../features/products/productSlice";
 const Wishlist = () => {
     const dispatch = useDispatch();
     useEffect(() => {
@@ -12,27 +13,36 @@ const Wishlist = () => {
     const getWishlistFromDb = () => {
         dispatch(getUserProductWishlist());
     }
-    const wishListState = useSelector((state) => state.auth?.wishlist?.wishlist)
-
+    const wishListState = useSelector((state) => state.auth?.wishlist?.wishlist || []);
+    const removeFromWishlist = (id) => {
+        dispatch(addToWishlist(id))
+        setTimeout(() => {
+            dispatch(getUserProductWishlist());
+        }, 300);
+    }
     return (
         <>
             <Meta title={"Wishlist"} />
             <BreadCrumb title="Wishlist" />
             <Container class1="wishlist-wrapper home-wapper-2 py-5">
                 <div className="row">
+                    {wishListState.length === 0 && <div className='text-center fs-3'>No Data</div>}
                     {
                         wishListState?.map((item, index) => {
                             return (
                                 <div className="col-3" key={index}>
                                     <div className="wishlist-card position-relative">
-                                        <img src="images/cross.svg"
+                                        <img onClick={() => { removeFromWishlist(item?._id) }}
+                                            src="images/cross.svg"
                                             alt="cross"
                                             className="position-absolute cross img-fluid"
                                         />
-                                        <div className="wishlist-card-image">
+                                        <div className="wishlist-card-image bg-white">
                                             <img src={item.images && item.images[0] && item.images[0].url ? item.images[0].url : "images/watch.jpg"}
-                                                className="img-fluid w-100"
-                                                alt="watch" />
+                                                className="img-fluid d-block mx-auto"
+                                                alt="watch"
+                                                width={160}
+                                            />
                                         </div>
 
                                         <div className="py-3 px-3">

@@ -7,7 +7,7 @@ import { services } from '../utils/data'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllProducts } from '../features/products/productSlice'
 import ReactStars from "react-rating-stars-component";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import prodcompare from "../images/prodcompare.svg";
 import wish from "../images/wish.svg";
 import watch2 from "../images/watch-1.avif";
@@ -26,6 +26,7 @@ const Home = () => {
     getallProducts();
   }, [])
   const productState = useSelector((state) => state.product.product);
+  const navigate=useNavigate();
   const getallProducts = () => {
     dispatch(getAllProducts());
   }
@@ -205,7 +206,7 @@ const Home = () => {
             Array.isArray(productState) && productState.map((item, index) => {
               return item.tags === "featured" ? (
                 <div key={index} className={"col-3"}>
-                  <Link
+                  <div
                     // to={`${location.pathname == "/"
                     // ? "/product/:id"
                     // : location.pathname == "/product/:id"
@@ -246,7 +247,7 @@ const Home = () => {
                         <button className='border-0 bg-transparent'><img src={addcart} alt="addcart" /></button>
                       </div>
                     </div>
-                  </Link>
+                  </div>
                 </div>
               ) : null;
             })
@@ -392,7 +393,7 @@ const Home = () => {
                     <div className="action-bar position-absolute">
                       <div className="d-flex flex-column gap-15">
                         <button className='border-0 bg-transparent'> <img src={prodcompare} alt="compare" /></button>
-                        <button className='border-0 bg-transparent'> <img src={view} alt="view" /></button>
+                        <button className='border-0 bg-transparent'> <img onClick={()=>navigate("/product/:id")} src={view} alt="view" /></button>
                         <button className='border-0 bg-transparent'><img src={addcart} alt="addcart" /></button>
                       </div>
                     </div>

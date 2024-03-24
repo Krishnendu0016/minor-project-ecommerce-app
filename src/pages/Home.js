@@ -206,13 +206,7 @@ const Home = () => {
             Array.isArray(productState) && productState.map((item, index) => {
               return item.tags === "featured" ? (
                 <div key={index} className={"col-3"}>
-                  <div
-                    // to={`${location.pathname == "/"
-                    // ? "/product/:id"
-                    // : location.pathname == "/product/:id"
-                    //   ? "/product/:id"
-                    //   : ":id"
-                    // }`} 
+                  <div 
                     className="product-card position-relative">
                     <div className="wishlist-icon position-absolute">
                       <button className='border-0 bg-transparent' onClick={(e) => { addToWish(item?._id) }}> <img src={wish} alt="wishlist" /></button>
@@ -243,7 +237,7 @@ const Home = () => {
                     <div className="action-bar position-absolute">
                       <div className="d-flex flex-column gap-15">
                         <button className='border-0 bg-transparent'> <img src={prodcompare} alt="compare" /></button>
-                        <button className='border-0 bg-transparent'> <img src={view} alt="view" /></button>
+                        <button className='border-0 bg-transparent'> <img onClick={()=>navigate("/product/"+item?._id)} src={view} alt="view" /></button>
                         <button className='border-0 bg-transparent'><img src={addcart} alt="addcart" /></button>
                       </div>
                     </div>
@@ -330,7 +324,9 @@ const Home = () => {
           {
             Array.isArray(productState) && productState.map((item, index) => {
               if (item.tags === 'special') {
-                return <SpecialProduct key={index}
+                return <SpecialProduct 
+                  key={index}
+                  id={item?._id}
                   brand={item?.brand}
                   title={item?.title}
                   totalrating={item?.totalrating.toString()}
@@ -356,13 +352,7 @@ const Home = () => {
             Array.isArray(productState) && productState.map((item, index) => {
               return item.tags === "popular" ? (
                 <div key={index} className={"col-3"}>
-                  <Link
-                    // to={`${location.pathname == "/"
-                    // ? "/product/:id"
-                    // : location.pathname == "/product/:id"
-                    //   ? "/product/:id"
-                    //   : ":id"
-                    // }`} 
+                  <div
                     className="product-card position-relative">
                     <div className="wishlist-icon position-absolute">
                       <button className='border-0 bg-transparent' onClick={(e) => { addToWish(item?._id) }}> <img src={wish} alt="wishlist" /></button>
@@ -393,11 +383,11 @@ const Home = () => {
                     <div className="action-bar position-absolute">
                       <div className="d-flex flex-column gap-15">
                         <button className='border-0 bg-transparent'> <img src={prodcompare} alt="compare" /></button>
-                        <button className='border-0 bg-transparent'> <img onClick={()=>navigate("/product/:id")} src={view} alt="view" /></button>
+                        <button className='border-0 bg-transparent'> <img onClick={()=>navigate("/product/"+item?._id)} src={view} alt="view" /></button>
                         <button className='border-0 bg-transparent'><img src={addcart} alt="addcart" /></button>
                       </div>
                     </div>
-                  </Link>
+                  </div>
                 </div>
               ) : null;
             })

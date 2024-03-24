@@ -28,13 +28,7 @@ const ProductCard = (props) => {
            <div 
            key={index}
            className={` ${location.pathname == "/product" ? `gr-${grid}` : "col-3"}`}>
-        <Link 
-          // to={`${location.pathname == "/"
-          // ? "/product/:id"
-          // : location.pathname == "/product/:id"
-          //   ? "/product/:id"
-          //   : ":id"
-          // }`} 
+        <div 
           className="product-card position-relative">
           <div className="wishlist-icon position-absolute">
             <button className='border-0 bg-transparent' onClick={(e)=>{addToWish(item?._id)}}> <img src={wish} alt="wishlist" /></button>
@@ -69,11 +63,11 @@ const ProductCard = (props) => {
           <div className="action-bar position-absolute">
             <div className="d-flex flex-column gap-15">
               <button className='border-0 bg-transparent'> <img src={prodcompare} alt="compare" /></button>
-              <button className='border-0 bg-transparent'> <img src={view} alt="view" /></button>
+              <Link to={'/product/'+item?._id} className='border-0 bg-transparent'> <img src={view} alt="view" /></Link>
               <button className='border-0 bg-transparent'><img src={addcart} alt="addcart" /></button>
             </div>
           </div>
-        </Link>
+        </div>
       </div>
         )
       })

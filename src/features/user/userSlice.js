@@ -46,6 +46,13 @@ export const deleteCartProduct = createAsyncThunk("user/cart/product/delete", as
         return thunkAPI.rejectWithValue(error)
     }
 })
+export const updateCartProduct = createAsyncThunk("user/cart/product/update", async (cartDetail, thunkAPI) => {
+    try {
+        return await authService.updateProductFromCart(cartDetail);
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error)
+    }
+})
 
 const getCustomerfromLocalStorage = localStorage.getItem("customer")
     ? JSON.parse(localStorage.getItem("customer"))
@@ -172,8 +179,29 @@ export const authSlice = createSlice({
                     toast.error("Something Went Wrong")
                 }
             })
+            .addCase(updateCartProduct.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(updateCartProduct.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isError = false;
+                state.isSuccess = true;
+                state.updatedCartProduct = action.payload;
+                if (state.isSuccess) {
+                    toast.success("Product Updated From Cart Successfully")
+                }
+            }).addCase(updateCartProduct.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.isSuccess = false;
+                state.message = action.error;
+                if (state.isSuccess == false) {
+                    toast.error("Something Went Wrong")
+                }
+            })
 
     }
 })
+
 
 export default authSlice.reducer;

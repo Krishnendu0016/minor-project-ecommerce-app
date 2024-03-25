@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Meta from '../com/Meta'
 import BreadCrumb from '../com/BreadCrumb'
 import watch from "../images/watch.jpg";
@@ -6,19 +6,31 @@ import { AiFillDelete } from 'react-icons/ai'
 import { Link } from "react-router-dom";
 import Container from '../com/Container';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteCartProduct, getUserCart } from '../features/user/userSlice';
+import { deleteCartProduct, getUserCart, updateCartProduct } from '../features/user/userSlice';
 
 const Cart = () => {
     const dispatch = useDispatch();
+    const [productUpdateDetail, setProductUpdateDetail] = useState(null)
     const userCartState = useSelector(state => state.auth.cartProducts)
     useEffect(() => {
         dispatch(getUserCart())
     }, []);
+    useEffect(() => {
+        if(productUpdateDetail){
+        dispatch(updateCartProduct({cartItemId : productUpdateDetail?.cartItemId, quantity: productUpdateDetail?.quantity}))
+        setTimeout(()=>{
+            dispatch(getUserCart())
+        },200)
+    }
+    },[productUpdateDetail])
     const deleteACartProduct = (id) => {
         dispatch(deleteCartProduct(id))
         setTimeout(()=>{
             dispatch(getUserCart())
         },200)
+    }
+    const updateACartProduct = (productUpdateDetail) => {
+        
     }
     return (
         <>
@@ -60,7 +72,8 @@ const Cart = () => {
                                                     min={1}
                                                     max={10}
                                                     id=""
-                                                    value={item?.quantity}
+                                                    value={productUpdateDetail?.quantity? productUpdateDetail?.quantity : item?.quantity}
+                                                    onChange={(e)=>{setProductUpdateDetail({cartItemId: item?._id ,quantity: e.target.value})}}
                                                 />
                                             </div>
                                             <div>

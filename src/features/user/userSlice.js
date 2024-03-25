@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { authService } from "./userService";
 import { toast } from "react-toastify";
+import { TbFlagCancel } from "react-icons/tb";
 export const registerUser = createAsyncThunk("auth/register", async (userData, thunkAPI) => {
     try {
         return await authService.register(userData)
@@ -34,6 +35,13 @@ export const addProdToCart = createAsyncThunk("user/cart/add", async (cartData, 
 export const getUserCart = createAsyncThunk("user/cart/get", async (thunkAPI) => {
     try {
         return await authService.getCart();
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error)
+    }
+})
+export const deleteCartProduct = createAsyncThunk("user/cart/product/delete", async (id, thunkAPI) => {
+    try {
+        return await authService.removeProductFromCart(id);
     } catch (error) {
         return thunkAPI.rejectWithValue(error)
     }
@@ -143,6 +151,26 @@ export const authSlice = createSlice({
                 state.isError = true;
                 state.isSuccess = false;
                 state.message = action.error;
+            })
+            .addCase(deleteCartProduct.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(deleteCartProduct.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isError = false;
+                state.isSuccess = true;
+                state.deleteCartProduct = action.payload;
+                if (state.isSuccess) {
+                    toast.success("Product Removed From Cart Successfully")
+                }
+            }).addCase(deleteCartProduct.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.isSuccess = false;
+                state.message = action.error;
+                if (state.isSuccess == false) {
+                    toast.error("Something Went Wrong")
+                }
             })
 
     }

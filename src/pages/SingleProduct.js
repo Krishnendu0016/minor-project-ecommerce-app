@@ -12,19 +12,31 @@ import watch from "../images/watch.jpg";
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAProduct } from '../features/products/productSlice';
+import { toast } from 'react-toastify';
+import { addProdToCart } from '../features/user/userSlice';
+
 const SingleProduct = () => {
+    const [color, setColor] = useState(null)
+    const [quantity, setQuantity] = useState(1)
     const location = useLocation();
     const getProductId = location.pathname.split("/")[2];
     const dispatch = useDispatch();
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(getAProduct(getProductId))
-    },[]);
+    }, []);
+    const uploadCart = () => {
+        if (color === null) {
+            toast.error("Please select color")
+            return false
+        } else {
+            dispatch(addProdToCart({ productId: productState?._id, quantity, color, price: productState?.price }))
+        }
+    }
     const productState = useSelector(state => state.product.singleproduct)
     const props = {
         width: 594,
         height: 600,
         zoomWidth: 600,
-
         img: productState?.images[0]?.url ? productState?.images[0]?.url : "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg",
     };
     const [orderedProduct, setorderedProduct] = useState(true);
@@ -127,7 +139,7 @@ const SingleProduct = () => {
                                 </div>
                                 <div className="d-flex gap-10 flex-column mt-2 mb-3">
                                     <h3 className="product-heading">Color :</h3>
-                                    <Color />
+                                    <Color setColor={setColor} colorData={productState?.color} />
                                 </div>
                                 <div className="d-flex align-items-center gap-15 flex-row mt-2 mb-3">
                                     <h3 className="product-heading">Quantity :</h3>
@@ -140,14 +152,17 @@ const SingleProduct = () => {
                                             className="form-control"
                                             style={{ width: "70px" }}
                                             id=""
+                                            onChange={(e) => setQuantity(e.target.value)}
+                                            value={quantity}
                                         />
                                     </div>
                                     <div className="d-flex align-items-center gap-30 ms-5">
                                         <button
                                             className="button border-0"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#staticBackdrop"
+                                            // data-bs-toggle="modal"
+                                            // data-bs-target="#staticBackdrop"
                                             type="button"
+                                            onClick={() => { uploadCart(productState?._id) }}
                                         >
                                             Add to Cart
                                         </button>
@@ -200,8 +215,8 @@ const SingleProduct = () => {
                         <h4>Description</h4>
                         <div className="bg-white p-3">
                             <p dangerouslySetInnerHTML={{
-                                    __html: productState?.description
-                                }}>
+                                __html: productState?.description
+                            }}>
                             </p>
                         </div>
                     </div>

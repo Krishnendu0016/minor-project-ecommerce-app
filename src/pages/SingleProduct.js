@@ -30,21 +30,21 @@ const SingleProduct = () => {
 
     }, []);
     useEffect(() => {
-        for (let index = 0; index < cartState.length; index++) {
-            if (getProductId == cartState[index]?.productId?._id) {
-                setAlReadyAdded(true)
+        if (cartState && cartState.length > 0) {
+            for (let index = 0; index < cartState.length; index++) {
+                if (getProductId == cartState[index]?.productId?._id) {
+                    setAlReadyAdded(true)
+                }
             }
-
         }
-
-    }, []);
+    }, [cartState]);
     const uploadCart = () => {
         if (color === null) {
             toast.error("Please select color")
             return false
         } else {
             dispatch(addProdToCart({ productId: productState?._id, quantity, color, price: productState?.price }))
-            navigate("/cart") 
+            navigate("/cart")
         }
     }
     const productState = useSelector(state => state.product.singleproduct)

@@ -11,6 +11,7 @@ import { deleteCartProduct, getUserCart, updateCartProduct } from '../features/u
 const Cart = () => {
     const dispatch = useDispatch();
     const [productUpdateDetail, setProductUpdateDetail] = useState(null)
+    const [totalAmount, setTotalAmount] = useState(null)
     const userCartState = useSelector(state => state.auth.cartProducts)
     useEffect(() => {
         dispatch(getUserCart())
@@ -29,9 +30,13 @@ const Cart = () => {
             dispatch(getUserCart())
         },200)
     }
-    const updateACartProduct = (productUpdateDetail) => {
-        
-    }
+    useEffect(() => {
+        let sum = 0;
+        for (let index = 0; userCartState && index < userCartState.length; index++) {
+            sum = sum + (Number(userCartState[index].quantity) * userCartState[index].price)
+            setTotalAmount(sum)
+        }
+    },[userCartState])
     return (
         <>
             <Meta title={"Cart"} />
@@ -91,11 +96,14 @@ const Cart = () => {
                             <div className="col-12 py-2 mt-4">
                                 <div className="d-flex justify-content-between align-items-baseline">
                                     <Link to="/product" className="button">Continue to Shopping</Link>
-                                    <div className="d-flex flex-column align-items-end">
-                                        <h4>SubTotal: $1000</h4>
+                                    {
+                                        (totalAmount !== null || totalAmount !== 0) &&
+                                        <div className="d-flex flex-column align-items-end">
+                                        <h4>SubTotal: ₹{totalAmount}</h4>
                                         <p>Taxex and Shipping calculated at Checkout</p>
                                         <Link to="/checkout" className="button">Checkout</Link>
-                                    </div>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>

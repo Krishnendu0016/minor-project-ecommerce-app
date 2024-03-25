@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { NavLink, Link } from 'react-router-dom';
 import { BsSearch } from 'react-icons/bs';
 import compare from "../images/compare.svg";
@@ -6,8 +6,9 @@ import wishlist from "../images/wishlist.svg";
 import user from "../images/user.svg";
 import cart from "../images/cart.svg";
 import menu from "../images/menu.svg";
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 const Header = () => {
+  const cartState = useSelector(state=>state?.auth?.cartProducts)
   const authState=useSelector(state=>state.auth)
   return (
     <>
@@ -71,7 +72,7 @@ const Header = () => {
                     className="  gap-10 text white">
                     <img src={cart} alt="cart" />
                     <div className='d-flex flex-column gap-10'>
-                      <span className='badge text-white'> 0</span>
+                      <span className='badge text-white'> {cartState?.length ? cartState?.length : 0} </span>
                     </div>
                   </Link>
                 </div>

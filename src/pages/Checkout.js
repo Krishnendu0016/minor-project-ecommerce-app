@@ -82,8 +82,8 @@ const Checkout = () => {
                 color: cartState[index].color._id,
                 price: cartState[index].price
             })
-            setCartProductState(items);
         }
+        setCartProductState(items);
     } else {
         console.log('cartState is undefined');
     }
@@ -96,29 +96,26 @@ const Checkout = () => {
             return;
         }
         try {
-            
-            const result = await axios.post("http://localhost:5000/api/user/order/checkout", {amount:totalAmount}, config)
+            const result = await axios.post("http://localhost:5000/api/user/order/checkout", {amount:(totalAmount+100)*100}, config)
             if (!result) {
                 alert("Something went wrong")
-                return;
+                return; 
             }
     
-            const { amount, id: order_id, currency } = result.data.order;
-    
+            const { amount, id, currency } = result.data.order;
             const options = {
-                key:'rzp_test_lE80ANmJtU3P2y', // Enter the Key ID generated from the Dashboard
+                key:process.env.RAZORPAY_KEY_ID, // Enter the Key ID generated from the Dashboard
                 amount:amount.toString(),
                 currency: currency ,
                 name: "Shoppers",
                 description: "Test Transaction",
-                order_id: order_id ,
+                order_id: id ,
                 handler: async function (response) {
                     const data = {
-                        orderCreationId: order_id,
+                        orderCreationId: id,
                         razorpayPaymentId: response.razorpay_payment_id,
                         razorpayOrderId: response.razorpay_order_id,
                     };
-    
                     const result = await axios.post("http://localhost:5000/api/user/order/paymentVerification", data, config);
                     
                     setPaymentInfo({
@@ -126,7 +123,7 @@ const Checkout = () => {
                         razorpayOrderId: response.razorpay_order_id,
                     })
                    
-                dispatch(createAnOrder({totalPrice:totalAmount,totalPriceAfterDiscount:totalAmount,orderItems:cartProductState,paymentInfo,shippingInfo}))
+                    dispatch(createAnOrder({totalPrice:totalAmount,totalPriceAfterDiscount:totalAmount,orderItems:cartProductState,paymentInfo,shippingInfo}))
 
                 },
                 prefill: {

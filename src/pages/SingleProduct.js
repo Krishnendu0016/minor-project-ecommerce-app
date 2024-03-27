@@ -31,7 +31,7 @@ const SingleProduct = () => {
     }, []);
     useEffect(() => {
         if (cartState && cartState.length > 0) {
-            for (let index = 0; index < cartState.length; index++) {
+            for (let index = 0; index < cartState?.length; index++) {
                 if (getProductId == cartState[index]?.productId?._id) {
                     setAlReadyAdded(true)
                 }

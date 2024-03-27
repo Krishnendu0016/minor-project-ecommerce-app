@@ -6,6 +6,7 @@ import Container from '../com/Container'
 import { useDispatch, useSelector } from 'react-redux'
 import { useFormik } from 'formik'
 import * as yup from "yup"
+import axios from 'axios'
 
 const shippingSchema = yup.object({
     firstName: yup.string().required("First Name is Required"),
@@ -48,6 +49,36 @@ const Checkout = () => {
           setShippingInfo(values)
         },
     });
+
+    const loadScript = (src) => {
+        return new Promise((resolve)=> {
+            const script = document.createElement("root");
+            script.src = src;
+            script.onload = () => {
+                resolve(true)
+            }
+            script.onerror = () => {
+                resolve(false)
+            }
+            document.body.appendChild(script)
+        })
+    }
+
+    const checkoutHandler = async() =>{
+        const res = await loadScript("https://checkout.razorpay.com/vi/checkout.js")
+        if(!res){
+            alert("Razorpay SDK failed to load")
+            return;
+        }
+        const result = await axios.post("http://localhost:5000/api/user/order/checkout")
+        if(!result) {
+            alert("Something went wrong")
+            return;
+        }
+
+        const {amount, id: order_id, currency} = result.data;
+        
+    }
 
     return (
         <Container class1="checkout-wrapper py-5 home-wapper-2">

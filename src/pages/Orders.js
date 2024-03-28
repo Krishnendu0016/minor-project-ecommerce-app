@@ -35,7 +35,7 @@ const Orders = () => {
                         {
                             Array.isArray(orderState) && orderState.map((item, index) => {
                                 return (
-                                    <div style={{ backgroundColor: "#febd69" }} className="row pt-3 my-3" key={index}>
+                                    <div style={{ backgroundColor: "#8cb2e1" }} className="row pt-3 my-3" key={index}>
                                         <div className="col-3">
                                             <p>{item?._id}</p>
                                         </div>

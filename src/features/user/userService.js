@@ -1,5 +1,6 @@
 import axios from "axios";
 import { base_url, config } from "../../utils/axiosConfig";
+import { TbPassword } from "react-icons/tb";
 const register = async (userData) => {
     console.log(userData)
     const response = await axios.post(`${base_url}user/register`, userData);
@@ -77,6 +78,13 @@ const forgotPassToken = async (data) => {
     }
 }
 
+const resetPass = async (data) => {
+    const response = await axios.post(`${base_url}user/reset-password/${data.tokem}`,{password:data?.password}, config);
+    if (response.data) {
+        return response.data;
+    }
+}
+
 export const authService = {
     register,
     login,
@@ -89,4 +97,5 @@ export const authService = {
     getUserOrders,
     updateUser,
     forgotPassToken,
+    resetPass
 } 

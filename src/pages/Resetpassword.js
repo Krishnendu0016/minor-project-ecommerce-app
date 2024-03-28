@@ -6,12 +6,12 @@ import Container from '../com/Container'
 import CustomInput from '../com/CustomInput'
 import { useDispatch, useSelector } from 'react-redux'
 import * as yup from 'yup';
-import { Formik, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import { resetPassword } from '../features/user/userSlice'
 
 
 const passwordSchema = yup.object({
-  password: yup.string().required("Password is Required")
+  password: yup.string().required("Password is Required"),
 });
 
 

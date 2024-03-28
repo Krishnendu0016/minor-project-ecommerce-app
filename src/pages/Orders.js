@@ -6,7 +6,7 @@ import { getOrders } from '../features/user/userSlice';
 
 const Orders = () => {
     const dispatch = useDispatch()
-    const orderState = useSelector(state => state.auth.getorderedproduct.orders)
+    const orderState = useSelector(state => state?.auth?.getorderedproduct?.orders)
     useEffect(() => {
         dispatch(getOrders())
     }, []);

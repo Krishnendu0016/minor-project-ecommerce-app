@@ -70,6 +70,13 @@ export const updateCartProduct = createAsyncThunk("user/cart/product/update", as
         return thunkAPI.rejectWithValue(error)
     }
 })
+export const updateProfile = createAsyncThunk("user/profile/update", async (data, thunkAPI) => {
+    try {
+        return await authService.updateUser(data);
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error)
+    }
+})
 
 const getCustomerfromLocalStorage = localStorage.getItem("customer")
     ? JSON.parse(localStorage.getItem("customer"))
@@ -250,7 +257,26 @@ export const authSlice = createSlice({
                 state.isSuccess = false;
                 state.message = action.error;
             })
-
+            .addCase(updateProfile.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(updateProfile.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isError = false;
+                state.isSuccess = true;
+                state.updatedUser = action.payload;
+                if (state.isSuccess) {
+                    toast.success("Profile Updated Succesfull")
+                }
+            }).addCase(updateProfile.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.isSuccess = false;
+                state.message = action.error;
+                if (state.isSuccess == false) {
+                    toast.error("Something Went Wrong")
+                }
+            })
     }
 })
 

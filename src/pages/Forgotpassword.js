@@ -1,12 +1,13 @@
 import React from 'react'
 import Meta from '../com/Meta'
 import BreadCrumb from '../com/BreadCrumb'
-import { Link , useNavigate} from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Container from '../com/Container'
 import CustomInput from '../com/CustomInput'
 import { Formik, useFormik } from 'formik';
 import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux'
+import { forgotPasswordToken } from '../features/user/userSlice'
 
 const emailSchema = yup.object({
   email: yup.string().email("Email should be valid").required("Email is Required"),
@@ -14,7 +15,7 @@ const emailSchema = yup.object({
 
 const Forgotpassword = () => {
 
-  const navigate=useNavigate()
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -22,8 +23,7 @@ const Forgotpassword = () => {
     },
     validationSchema: emailSchema,
     onSubmit: values => {
-      // dispatch(loginUser(values));
-      navigate('/')
+      dispatch(forgotPasswordToken(values));
     },
   });
 
@@ -40,10 +40,10 @@ const Forgotpassword = () => {
                 We will send you an email to reset your password
               </p>
               <form action="" onSubmit={formik.handleSubmit} className="d-flex flex-column gap-15">
-                <CustomInput type="email" name="email" placeholder="Email" 
-                onChange={formik.handleChange("email")}
-                onBlur={formik.handleBlur("email")}
-                value={formik.values.email}/>
+                <CustomInput type="email" name="email" placeholder="Email"
+                  onChange={formik.handleChange("email")}
+                  onBlur={formik.handleBlur("email")}
+                  value={formik.values.email} />
                 <div className='error text-center'>
                   {formik.touched.email && formik.errors.email}
                 </div>

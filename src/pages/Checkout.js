@@ -24,11 +24,9 @@ const Checkout = () => {
     const dispatch = useDispatch()
     const cartState = useSelector(state => state.auth.cartProducts)
     const [totalAmount, setTotalAmount] = useState(null)
-    const [shippingInfo, setShippingInfo] = useState(null)
-    const [paymentInfo,setPaymentInfo]=useState({razorpayPaymentId:"",razorpayOrderId:""})
     const [cartProductState,setCartProductState]=useState([])
-
-    console.log(paymentInfo,shippingInfo)
+    let shippingInfo = {}
+    let paymentInfo = {}
     useEffect(() => {
         let sum = 0;
         for (let index = 0; cartState && index < cartState.length; index++) {
@@ -50,7 +48,7 @@ const Checkout = () => {
         },
         validationSchema: shippingSchema,
         onSubmit: values => {
-            setShippingInfo(values)
+            shippingInfo = values
             setTimeout(()=>{
                 checkoutHandler();
             },300)
@@ -117,12 +115,10 @@ const Checkout = () => {
                         razorpayOrderId: response.razorpay_order_id,
                     };
                     const result = await axios.post("http://localhost:5000/api/user/order/paymentVerification", data, config);
-                    
-                    setPaymentInfo({
+                    paymentInfo = {
                         razorpayPaymentId: response.razorpay_payment_id,
                         razorpayOrderId: response.razorpay_order_id,
-                    })
-                   
+                    }
                     dispatch(createAnOrder({totalPrice:totalAmount,totalPriceAfterDiscount:totalAmount,orderItems:cartProductState,paymentInfo,shippingInfo}))
 
                 },

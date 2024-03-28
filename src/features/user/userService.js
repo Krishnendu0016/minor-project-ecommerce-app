@@ -70,6 +70,13 @@ const updateUser = async(data)=>{
     } 
 }
 
+const forgotPassToken = async (data) => {
+    const response = await axios.put(`${base_url}user/forgot-password-token`, data,config);
+    if (response.data) {
+        return response.data;
+    } 
+}
+
 export const authService = {
     register,
     login,

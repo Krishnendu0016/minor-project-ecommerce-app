@@ -8,8 +8,13 @@ import cart from "../images/cart.svg";
 import menu from "../images/menu.svg";
 import { useSelector } from 'react-redux'
 const Header = () => {
-  const cartState = useSelector(state=>state?.auth?.cartProducts)
+  const cartState=useSelector(state=>state?.auth?.cartProducts)
   const authState=useSelector(state=>state.auth)
+
+  const handleLogout = ()=>  {
+    localStorage.clear()
+    window.location.reload();
+  }
   return (
     <>
       <header className='header-top-strip py-1'>
@@ -107,6 +112,7 @@ const Header = () => {
                     <NavLink to="/product">Our Store</NavLink>
                     <NavLink to="/my-orders">My Orders</NavLink>
                     <NavLink to="/contact">Contact </NavLink>
+                    <button onClick={handleLogout} className="border border-0 bg-transparent text-white mt-0" type='button' >Logout</button>
                   </div>
                 </div>
               </div>

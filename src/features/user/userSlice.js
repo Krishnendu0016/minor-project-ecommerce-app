@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { authService } from "./userService";
 import { toast } from "react-toastify";
-import { TbFlagCancel } from "react-icons/tb";
+// import { TbFlagCancel } from "react-icons/tb";
 export const registerUser = createAsyncThunk("auth/register", async (userData, thunkAPI) => {
     try {
         return await authService.register(userData)
@@ -216,7 +216,7 @@ export const authSlice = createSlice({
                 state.isError = true;
                 state.isSuccess = false;
                 state.message = action.error;
-                if (state.isSuccess == false) {
+                if (state.isSuccess === false) {
                     toast.error("Something Went Wrong")
                 }
             })
@@ -236,7 +236,7 @@ export const authSlice = createSlice({
                 state.isError = true;
                 state.isSuccess = false;
                 state.message = action.error;
-                if (state.isSuccess == false) {
+                if (state.isSuccess === false) {
                     toast.error("Something Went Wrong")
                 }
             })
@@ -256,7 +256,7 @@ export const authSlice = createSlice({
                 state.isError = true;
                 state.isSuccess = false;
                 state.message = action.error;
-                if (state.isSuccess == false) {
+                if (state.isSuccess === false) {
                     toast.error("Something Went Wrong")
                 }
             })
@@ -290,7 +290,7 @@ export const authSlice = createSlice({
                 state.isError = true;
                 state.isSuccess = false;
                 state.message = action.error;
-                if (state.isSuccess == false) {
+                if (state.isSuccess === false) {
                     toast.error("Something Went Wrong")
                 }
             })
@@ -310,7 +310,7 @@ export const authSlice = createSlice({
                 state.isError = true;
                 state.isSuccess = false;
                 state.message = action.error;
-                if (state.isSuccess == false) {
+                if (state.isSuccess === false) {
                     toast.error("Something Went Wrong")
                 }
             })
@@ -331,7 +331,7 @@ export const authSlice = createSlice({
                 state.isError = true;
                 state.isSuccess = false;
                 state.message = action.error;
-                if (state.isSuccess == false) {
+                if (state.isSuccess === false) {
                     toast.error("Something Went Wrong")
                 }
             })

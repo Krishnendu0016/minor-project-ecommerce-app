@@ -1,6 +1,6 @@
 import axios from "axios";
 import { base_url, config } from "../../utils/axiosConfig";
-import { TbPassword } from "react-icons/tb";
+// import { TbPassword } from "react-icons/tb";
 const register = async (userData) => {
     console.log(userData)
     const response = await axios.post(`${base_url}user/register`, userData);

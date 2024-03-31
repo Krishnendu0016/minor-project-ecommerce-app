@@ -15,8 +15,6 @@ const passwordSchema = yup.object({
 });
 
 
-
-
 const Resetpassword = () => {
   const location=useLocation();
   const getToken=location.pathname.split("/")[2]

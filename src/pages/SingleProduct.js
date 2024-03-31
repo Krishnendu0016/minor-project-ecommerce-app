@@ -65,6 +65,7 @@ const SingleProduct = () => {
         textField.remove();
     };
     const closeModal = () => { };
+    
     return (
         <>
             <Meta title={"Product Name"} />
@@ -115,10 +116,10 @@ const SingleProduct = () => {
                                 </a>
                             </div>
                             <div className=" py-3">
-                                <div className="d-flex gap-10 align-items-center my-2">
+                                {/* <div className="d-flex gap-10 align-items-center my-2">
                                     <h3 className="product-heading">Type :</h3>
                                     <p className="product-data">Watch</p>
-                                </div>
+                                </div> */}
                                 <div className="d-flex gap-10 align-items-center my-2">
                                     <h3 className="product-heading">Brand :</h3>
                                     <p className="product-data">{productState?.brand}</p>
@@ -201,7 +202,8 @@ const SingleProduct = () => {
                                     </div>
                                     <div>
                                         <a href="">
-                                            <AiOutlineHeart className="fs-5 me-2" /> Add to Wishlist
+                                            <AiOutlineHeart className="fs-5 me-2" /> 
+                                            Add to Wishlist
                                         </a>
                                     </div>
                                 </div>

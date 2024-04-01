@@ -65,7 +65,7 @@ const SingleProduct = () => {
         textField.remove();
     };
     const closeModal = () => { };
-    
+
     return (
         <>
             <Meta title={"Product Name"} />
@@ -202,7 +202,7 @@ const SingleProduct = () => {
                                     </div>
                                     <div>
                                         <a href="">
-                                            <AiOutlineHeart className="fs-5 me-2" /> 
+                                            <AiOutlineHeart className="fs-5 me-2" />
                                             Add to Wishlist
                                         </a>
                                     </div>
@@ -234,6 +234,8 @@ const SingleProduct = () => {
                     </div>
                 </div>
             </Container>
+
+          
 
             <Container class1="description-wrapper py-5 home-wapper-2">
                 <div className="row">

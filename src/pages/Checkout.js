@@ -7,8 +7,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useFormik } from 'formik'
 import * as yup from "yup"
 import axios from 'axios'
-import {config} from "../utils/axiosConfig";
+import { config } from "../utils/axiosConfig";
 import { createAnOrder } from '../features/user/userSlice'
+import MapComponent from './Map'
 
 const shippingSchema = yup.object({
     firstName: yup.string().required("First Name is Required"),
@@ -24,7 +25,7 @@ const Checkout = () => {
     const dispatch = useDispatch()
     const cartState = useSelector(state => state.auth.cartProducts)
     const [totalAmount, setTotalAmount] = useState(null)
-    const [cartProductState,setCartProductState]=useState([])
+    const [cartProductState, setCartProductState] = useState([])
     let shippingInfo = {}
     let paymentInfo = {}
     useEffect(() => {
@@ -49,9 +50,9 @@ const Checkout = () => {
         validationSchema: shippingSchema,
         onSubmit: values => {
             shippingInfo = values
-            setTimeout(()=>{
+            setTimeout(() => {
                 checkoutHandler();
-            },300)
+            }, 300)
         },
     });
 
@@ -70,22 +71,22 @@ const Checkout = () => {
     }
 
 
-   useEffect(() => {
-    let items = []
-    if (cartState) {
-        for (let index = 0; index < cartState.length; index++) {
-            items.push({
-                product: cartState[index].productId._id,
-                quantity: cartState[index].quantity,
-                color: cartState[index].color._id,
-                price: cartState[index].price
-            })
+    useEffect(() => {
+        let items = []
+        if (cartState) {
+            for (let index = 0; index < cartState.length; index++) {
+                items.push({
+                    product: cartState[index].productId._id,
+                    quantity: cartState[index].quantity,
+                    color: cartState[index].color._id,
+                    price: cartState[index].price
+                })
+            }
+            setCartProductState(items);
+        } else {
+            console.log('cartState is undefined');
         }
-        setCartProductState(items);
-    } else {
-        console.log('cartState is undefined');
-    }
-}, [])
+    }, [])
 
     const checkoutHandler = async () => {
         const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js")
@@ -94,20 +95,20 @@ const Checkout = () => {
             return;
         }
         try {
-            const result = await axios.post("http://localhost:5000/api/user/order/checkout", {amount:(totalAmount+100)*100}, config)
+            const result = await axios.post("http://localhost:5000/api/user/order/checkout", { amount: (totalAmount + 100) * 100 }, config)
             if (!result) {
                 alert("Something went wrong")
-                return; 
+                return;
             }
-    
+
             const { amount, id, currency } = result.data.order;
             const options = {
-                key:process.env.RAZORPAY_KEY_ID, // Enter the Key ID generated from the Dashboard
-                amount:amount.toString(),
-                currency: currency ,
+                key: process.env.RAZORPAY_KEY_ID, // Enter the Key ID generated from the Dashboard
+                amount: amount.toString(),
+                currency: currency,
                 name: "Shoppers",
                 description: "Test Transaction",
-                order_id: id ,
+                order_id: id,
                 handler: async function (response) {
                     const data = {
                         orderCreationId: id,
@@ -119,7 +120,7 @@ const Checkout = () => {
                         razorpayPaymentId: response.razorpay_payment_id,
                         razorpayOrderId: response.razorpay_order_id,
                     }
-                    dispatch(createAnOrder({totalPrice:totalAmount,totalPriceAfterDiscount:totalAmount,orderItems:cartProductState,paymentInfo,shippingInfo}))
+                    dispatch(createAnOrder({ totalPrice: totalAmount, totalPriceAfterDiscount: totalAmount, orderItems: cartProductState, paymentInfo, shippingInfo }))
 
                 },
                 prefill: {
@@ -134,14 +135,15 @@ const Checkout = () => {
                     color: "#61dafb",
                 },
             };
-    
+
             const paymentObject = new window.Razorpay(options);
             paymentObject.open();
         } catch (error) {
             console.error(error.response ? error.response.data : error);
         }
     }
-    
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
     return (
         <Container class1="checkout-wrapper py-5 home-wapper-2">
             <div className="row">
@@ -177,27 +179,7 @@ const Checkout = () => {
                             action=""
                             className="d-flex gap-15 flex-wrap justify-content-between"
                         >
-                            <div className="w-100">
-                                <select
-                                    name="country"
-                                    value={formik.values.country}
-                                    onChange={formik.handleChange("country")}
-                                    onBlur={formik.handleBlur("country")}
-                                    className="form-control form-select"
-                                    id="">
-                                    <option value="" selected disabled>
-                                        Select Country
-                                    </option>
-                                    <option value="India">
-                                        India
-                                    </option>
-                                </select>
-                                <div className="error ms-2 my-1">
-                                    {
-                                        formik.touched.country && formik.errors.country
-                                    }
-                                </div>
-                            </div>
+
                             <div className="flex-grow-1">
                                 <input
                                     type="text"
@@ -262,22 +244,28 @@ const Checkout = () => {
                                     }
                                 </div>
                             </div>
-                            <div className="flex-grow-1" >
-                                <input
-                                    type="text"
-                                    placeholder="City"
-                                    className="form-control"
-                                    name="city"
-                                    value={formik.values.city}
-                                    onChange={formik.handleChange("city")}
-                                    onBlur={formik.handleBlur("city")}
-                                />
+                            <div className="flex-grow-1">
+                                <select
+                                    name="country"
+                                    value={formik.values.country}
+                                    onChange={formik.handleChange("country")}
+                                    onBlur={formik.handleBlur("country")}
+                                    className="form-control form-select"
+                                    id="">
+                                    <option value="" selected disabled>
+                                        Select Country
+                                    </option>
+                                    <option value="India">
+                                        India
+                                    </option>
+                                </select>
                                 <div className="error ms-2 my-1">
                                     {
-                                        formik.touched.city && formik.errors.city
+                                        formik.touched.country && formik.errors.country
                                     }
                                 </div>
                             </div>
+
                             <div className="flex-grow-1">
                                 <select
                                     name="state"
@@ -319,11 +307,56 @@ const Checkout = () => {
                                     <option value="West Bengal">West Bengal</option>
 
                                 </select>
+
+
                                 <div className="error ms-2 my-1">
                                     {
                                         formik.touched.state && formik.errors.state
                                     }
                                 </div>
+                            </div>
+
+
+
+
+                            <div className="flex-grow-1" >
+                                <input
+                                    type="text"
+                                    placeholder="City"
+                                    className="form-control"
+                                    name="city"
+                                    value={formik.values.city}
+                                    onChange={formik.handleChange("city")}
+                                    onBlur={formik.handleBlur("city")}
+                                />
+                                <div className="error ms-2 my-1">
+                                    {
+                                        formik.touched.city && formik.errors.city
+                                    }
+                                </div>
+                            </div>
+
+
+                            <div className="flex-grow-1">
+                                <select
+                                    name="mode"
+                                    value={formik.values.mode}
+                                    onChange={formik.handleChange("mode")}
+                                    onBlur={formik.handleBlur("mode")}
+                                    className="form-control form-select"
+                                    id="">
+                                    <option value="" selected >
+                                        Delivery to my address
+                                    </option>
+                                    {/* <option value="Delivery">Delivery to my address</option> */}
+                                    <option value="Pickup">Pick up from the store</option>
+
+                                    <div className="error ms-2 my-1">
+                                        {
+                                            formik.touched.mode && formik.errors.mode
+                                        }
+                                    </div>
+                                </select>
                             </div>
                             <div className="flex-grow-1">
                                 <input
@@ -350,10 +383,14 @@ const Checkout = () => {
                                     <Link to="/cart" className="button">Continue to Shopping</Link>
                                     <button className="button" type="submit" >Place Order</button>
                                 </div>
+
                             </div>
+
                         </form>
+
                     </div>
                 </div>
+
                 <div className="col-5">
                     <div className="border-bottom py-4">
                         {
@@ -398,7 +435,34 @@ const Checkout = () => {
                     </div>
                 </div>
             </div>
+            <Container class1="contact-wrapper py-5 home-wapper-2">
+                <div className="row">
+                    <div className="col-12 ">
+                    {/* <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29926.107061537532!2d85.80364222784135!3d20.35139139254361!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a190912b69339ab%3A0xa11e7186a04f1474!2sPatia%2C%20Bhubaneswar%2C%20Odisha!5e0!3m2!1sen!2sin!4v1709872271022!5m2!1sen!2sin"
+              width="600"
+              height="450"
+              className="border-0 w-100"
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe> */}
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d239486.66728487329!2d85.65563903334204!3d20.30112904837954!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a1909d2d5170aa5%3A0xfc580e2b68b33fa8!2sBhubaneswar%2C%20Odisha!5e0!3m2!1sen!2sin!4v1711974785205!5m2!1sen!2sin" 
+            width="600" 
+            height="450" 
+            className="border-0 w-100"
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade">
+                
+            </iframe>
+            {/* <MapComponent/> */}
+                    </div>
+                </div>
+            </Container>
         </Container>
+
+
 
     )
 }
@@ -407,7 +471,7 @@ export default Checkout
 
 
 
-
+ 
 
 
 

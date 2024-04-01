@@ -46,7 +46,7 @@ const Contact = () => {
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
-          </div>
+          </div> 
           <div className="col-12 mt-5">
             <div className="contact-inner-wrapper d-flex justify-content-between ">
               <div>
@@ -65,7 +65,7 @@ const Contact = () => {
                   <div className="errors">
                     {
                       formik.touched.name && formik.errors.name
-                    }
+                    } 
                   </div>
                   </div>
                   <div>

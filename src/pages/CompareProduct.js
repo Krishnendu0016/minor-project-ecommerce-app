@@ -66,7 +66,7 @@ const CompareProduct = () => {
                                             <div>
                                                 <div className="product-detail">
                                                     <h5>Price:</h5>
-                                                    <h6 className="price">${item?.price}</h6>
+                                                    <h6 className="price">₹{item?.price}</h6>
                                                 </div>
                                             </div>
                                             <div>
@@ -96,7 +96,14 @@ const CompareProduct = () => {
                                                     <Color />
                                                 </div>
                                             </div>
-
+                                            <div>
+                                                <div className="product-detail">
+                                                    <h5 dangerouslySetInnerHTML={{
+                                                        __html: item?.description
+                                                    }}>
+                                                    </h5>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div className="compare-product-details">
 

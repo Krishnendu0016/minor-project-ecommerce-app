@@ -17,18 +17,18 @@ const Cart = () => {
         dispatch(getUserCart())
     }, []);
     useEffect(() => {
-        if(productUpdateDetail){
-        dispatch(updateCartProduct({cartItemId : productUpdateDetail?.cartItemId, quantity: productUpdateDetail?.quantity}))
-        setTimeout(()=>{
-            dispatch(getUserCart())
-        },200)
-    }
-    },[productUpdateDetail])
+        if (productUpdateDetail) {
+            dispatch(updateCartProduct({ cartItemId: productUpdateDetail?.cartItemId, quantity: productUpdateDetail?.quantity }))
+            setTimeout(() => {
+                dispatch(getUserCart())
+            }, 200)
+        }
+    }, [productUpdateDetail])
     const deleteACartProduct = (id) => {
         dispatch(deleteCartProduct(id))
-        setTimeout(()=>{
+        setTimeout(() => {
             dispatch(getUserCart())
-        },200)
+        }, 200)
     }
     useEffect(() => {
         let sum = 0;
@@ -36,7 +36,7 @@ const Cart = () => {
             sum = sum + (Number(userCartState[index].quantity) * userCartState[index].price)
         }
         setTotalAmount(sum)
-    },[userCartState])
+    }, [userCartState])
     return (
         <>
             <Meta title={"Cart"} />
@@ -56,7 +56,12 @@ const Cart = () => {
                                     <div key={index} className="cart-data d-flex py-3 mb-2 justify-content-between align-items-center ">
                                         <div className="cart-col-1 d-flex gap-15 align-items-center">
                                             <div className="w-25">
-                                                <img src={watch} className="img-fluid" alt="product image" />
+                                                <img
+                                                    src={item?.productId?.images[0]?.url}
+                                                    className="img-fluid d-block mx-auto"
+                                                    alt="watch"
+                                                    width={120}
+                                                />
                                             </div>
                                             <div className="w-75">
                                                 <p>{item?.productId?.title}</p>
@@ -78,11 +83,11 @@ const Cart = () => {
                                                     max={10}
                                                     id=""
                                                     value={item?.quantity}
-                                                    onChange={(e)=>{setProductUpdateDetail({cartItemId: item?._id ,quantity: e.target.value})}}
+                                                    onChange={(e) => { setProductUpdateDetail({ cartItemId: item?._id, quantity: e.target.value }) }}
                                                 />
                                             </div>
                                             <div>
-                                                <AiFillDelete onClick={()=>{deleteACartProduct(item?._id)}} className="text-danger" />
+                                                <AiFillDelete onClick={() => { deleteACartProduct(item?._id) }} className="text-danger" />
                                             </div>
                                         </div>
                                         <div className="cart-col-4">
@@ -99,9 +104,9 @@ const Cart = () => {
                                     {
                                         (totalAmount !== null || totalAmount !== 0) &&
                                         <div className="d-flex flex-column align-items-end">
-                                        <h4>SubTotal: ₹{totalAmount}</h4>
-                                        <p>Taxex and Shipping calculated at Checkout</p>
-                                        <Link to="/checkout" className="button">Checkout</Link>
+                                            <h4>SubTotal: ₹{totalAmount}</h4>
+                                            <p>Taxex and Shipping calculated at Checkout</p>
+                                            <Link to="/checkout" className="button">Checkout</Link>
                                         </div>
                                     }
                                 </div>
